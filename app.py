@@ -1,50 +1,29 @@
-import torch
-from diffusers import (
-    StableDiffusionXLPipeline, 
-    EulerAncestralDiscreteScheduler,
-    AutoencoderKL
-)
-from io import BytesIO
+import torchaudio
+from audiocraft.models import MusicGen
+from audiocraft.data.audio import audio_write
+import io
 import base64
-import os
-
 
 class InferlessPythonModel:
+    
     def initialize(self):
-        # Load VAE component
-        self.vae = AutoencoderKL.from_pretrained(
-            "madebyollin/sdxl-vae-fp16-fix", 
-            torch_dtype=torch.float16
-        )
+        self.model = MusicGen.get_pretrained('facebook/musicgen-stereo-melody-large')
+        self.model.set_generation_params(duration=8)
+
         
-        # Configure the pipeline
-        self.pipe = StableDiffusionXLPipeline.from_pretrained(
-            "cagliostrolab/animagine-xl-3.0", 
-            vae=self.vae,
-            torch_dtype=torch.float16, 
-            use_safetensors=True, 
-        )
-        self.pipe.scheduler = EulerAncestralDiscreteScheduler.from_config(self.pipe.scheduler.config)
-        self.pipe.to('cuda')
-
-
     def infer(self, inputs):
-        prompt = inputs["prompt"]
-        negative_prompt = inputs["negative_prompt"]
         
-        image = self.pipe(
-            prompt, 
-            negative_prompt=negative_prompt, 
-            width=832,
-            height=1216,
-            guidance_scale=7,
-            num_inference_steps=28
-        ).images[0]
+        descriptions = [inputs["prompt"]]
+        wav = model.generate(descriptions)
+        
+        for idx, one_wav in enumerate(wav):
+            audio_write("temp", one_wav.cpu(), model.sample_rate, strategy="loudness", loudness_compressor=True)
+        
+        with open("temp.wav", "rb") as audio_file:
+            audio_bytes = audio_file.read()
+            audio_base64 = base64.b64encode(audio_bytes).decode('utf-8')
+        
+        return {"generated_audio_base64": audio_base64}
 
-        buff = BytesIO()
-        image.save(buff, format="JPEG")
-        img_str = base64.b64encode(buff.getvalue()).decode()
-        return { "generated_image_base64" : img_str }
-        
-    def finalize(self):
-        self.pipe = None
+    def finalize(self,args):
+        self.model = None
