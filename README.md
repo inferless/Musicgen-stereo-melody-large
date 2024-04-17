@@ -1,5 +1,20 @@
-# Musicgen-stereo-melody-large
+# Tutorial - Deploy Musicgen-stereo-melody-large using Inferless
 Meta releases [MusicGen](https://audiocraft.metademolab.com/musicgen.html), a text-to-music model that converts text descriptions or audio prompts into high-quality music samples.
+
+Check out [this tutorial](https://docs.inferless.com/how-to-guides/deploy-stable-cascade-using-inferless#deploying-the-model-on-inferless) which will guides you through the process of deploying a Musicgen-stereo-melody-large model using Inferless.
+
+## TL;DR - Deploy Musicgen-stereo-melody-large using Inferless:
+
+- Deployment of Musicgen-stereo-melody-large model using [Audiocraft](https://github.com/facebookresearch/audiocraft).
+- By using the Audiocraft, you can expect an average latency of `13.78 sec` for a `8 sec` music sample. This setup has an average cold start time of `16.17 sec`.
+- Dependencies defined in `inferless-runtime-config.yaml`.
+- GitHub/GitLab template creation with `app.py`, `inferless-runtime-config.yaml` and `inferless.yaml`.
+- Model class in `app.py` with `initialize`, `infer`, and `finalize` functions.
+- Custom runtime creation with necessary system and Python packages.
+- Model import via GitHub with `input_schema.py` file.
+- Recommended GPU: NVIDIA A100 for optimal performance.
+- Custom runtime selection in advanced configuration.
+- Final review and deployment on the Inferless platform.
 
 ---
 ## Prerequisites
