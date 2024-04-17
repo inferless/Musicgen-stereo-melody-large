@@ -14,7 +14,7 @@ class InferlessPythonModel:
     def infer(self, inputs):
         
         descriptions = [inputs["prompt"]]
-        wav = model.generate(descriptions)
+        wav = self.model.generate(descriptions)
         
         for idx, one_wav in enumerate(wav):
             audio_write("temp", one_wav.cpu(), model.sample_rate, strategy="loudness", loudness_compressor=True)
