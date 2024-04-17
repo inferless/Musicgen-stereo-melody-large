@@ -1,5 +1,5 @@
-# Animagine-xl-3.0
-This is a animagine-xl-3.0 model template you can use to import your model on Inferless Platform. Animagine XL 3.0, the advanced open-source anime text-to-image model. Building on the foundation of Animagine XL 2.0 and powered by Stable Diffusion XL, this latest version offers superior image generation. It features enhancements in hand anatomy, efficient tag ordering, and a deeper understanding of anime concepts.
+# Musicgen-stereo-melody-large
+Meta releases [MusicGen](https://audiocraft.metademolab.com/musicgen.html), a text-to-music model that converts text descriptions or audio prompts into high-quality music samples.
 
 ---
 ## Prerequisites
@@ -44,7 +44,7 @@ curl --location '<your_inference_url>' \
               "inputs": [
                 {
                   "data": [
-                    "1girl, arima kana, oshi no ko, solo, upper body, v, smile, looking at viewer, outdoors, night"
+                    "Rock with saturated guitars, a heavy bass line and crazy drum break and fills."
                   ],
                   "name": "prompt",
                   "shape": [
