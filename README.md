@@ -1,7 +1,7 @@
 # Tutorial - Deploy Musicgen-stereo-melody-large using Inferless
 Meta releases [MusicGen](https://audiocraft.metademolab.com/musicgen.html), a text-to-music model that converts text descriptions or audio prompts into high-quality music samples.
 
-Check out [this tutorial](https://docs.inferless.com/how-to-guides/deploy-stable-cascade-using-inferless#deploying-the-model-on-inferless) which will guides you through the process of deploying a Musicgen-stereo-melody-large model using Inferless.
+Check out [this tutorial](https://docs.inferless.com/how-to-guides/deploy-musicgen-melody-large) which will guides you through the process of deploying a Musicgen-stereo-melody-large model using Inferless.
 
 ## TL;DR - Deploy Musicgen-stereo-melody-large using Inferless:
 
